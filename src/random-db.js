@@ -21,7 +21,7 @@ function createRandomWidget(id) {
     let randomTemplateContent = '';
 
     for (; i >= 0; i--) {
-        randomTemplate.push(`<div class='editable'> ${numbers[i]} </div>`);
+        randomTemplate.push(`<div class='editable'>${numbers[i]}</div>`);
     }
 
     randomTemplateContent = randomTemplate.reverse().join('');

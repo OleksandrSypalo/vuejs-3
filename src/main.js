@@ -15,9 +15,9 @@ import DB from './db';
 import App from './components/App.vue';
 import Widgets from './components/Widgets.vue';
 import Widget from './components/Widget.vue';
-import TemplateEdit from './components/TemplateEdit.vue';
+import Navbar from './components/Navbar.vue';
 
-Vue.component('template-edit', TemplateEdit);
+Vue.component('component-navbar', Navbar);
 
 const router = new VueRouter({
     mode: 'history',
