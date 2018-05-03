@@ -3,54 +3,47 @@
         <b-card :title="name" tag="article">
             <div>
                 <div v-for="item in items"
+                     :key="item.id"
                      class="editable"
                      :class="{'focus': item.isFocused}"
                      @click="focusIn(item)"
                 >
-                <div class="content-wrap"
-                     :style="'font-size:' + item.fontSize + 'px;'"
-                >{{item.html}}</div>
-
-                <div v-if="item.isFocused" class="form-wrap">
-                    <b-container fluid tag="form" @submit.prevent="submitMethod(item)">
-                        <b-row>
-                            <b-col sm="3">
-                                <label :for="`text-${id}`">Content:</label>
-                            </b-col>
-                            <b-col sm="9">
-                                <b-form-input :id="`text-${id}`"
-                                              v-model="item.html"
-                                              type="text"
-                                ></b-form-input>
-                            </b-col>
-                        </b-row>
-                        <b-row>
-                            <b-col sm="3">
-                                <label :for="`font_size-${id}`">Font Size ({{item.fontSize}}px):</label>
-                            </b-col>
-                            <b-col sm="9">
-                                <b-form-input :id="`font_size-${id}`"
-                                              v-model="item.fontSize"
-                                              type="range"
-                                              min="1"
-                                              max="100"
-                                ></b-form-input>
-                            </b-col>
-                        </b-row>
-                        <b-row>
-                            <b-col sm="9">
-                                <b-button type="submit"
-                                          variant="primary"
-                                >Save & Close
-                                </b-button>
-                            </b-col>
-                        </b-row>
-                    </b-container>
+                    <div class="content-wrap" :style="'font-size:' + item.fontSize + 'px;'">{{item.html}}</div>
+                    <div v-if="item.isFocused" class="form-wrap">
+                        <b-container fluid tag="form" @submit.prevent="submitMethod(item)">
+                            <b-row>
+                                <b-col sm="3">
+                                    <label :for="`text-${id}`">Content:</label>
+                                </b-col>
+                                <b-col sm="9">
+                                    <b-form-input :id="`text-${id}`"
+                                                  v-model="item.html"
+                                                  type="text"
+                                    ></b-form-input>
+                                </b-col>
+                            </b-row>
+                            <b-row>
+                                <b-col sm="3">
+                                    <label :for="`font_size-${id}`">Font Size ({{item.fontSize}}px):</label>
+                                </b-col>
+                                <b-col sm="9">
+                                    <b-form-input :id="`font_size-${id}`"
+                                                  v-model="item.fontSize"
+                                                  type="range"
+                                                  min="1"
+                                                  max="100"
+                                    ></b-form-input>
+                                </b-col>
+                            </b-row>
+                            <b-row>
+                                <b-col sm="9">
+                                    <b-button type="submit" variant="primary">Save & Close</b-button>
+                                </b-col>
+                            </b-row>
+                        </b-container>
+                    </div>
                 </div>
-                </div>
-                <b-button :to="{name: 'delete', params: {id: $route.params.id}}" variant="danger">
-                    Delete
-                </b-button>
+                <b-button :to="{name: 'delete', params: {id: $route.params.id}}" variant="danger">Delete</b-button>
             </div>
         </b-card>
     </div>
@@ -58,6 +51,7 @@
 
 <script>
 import DB from '../db';
+import utils from '../utils';
 
 export default {
     data() {
@@ -119,6 +113,7 @@ function createDataItems(context) {
 
     Array.prototype.forEach.call(items, (item)=> {
         result.push({
+            id: utils.uniq(),
             originalNode: item,
             isFocused: false,
             html: item.innerHTML,

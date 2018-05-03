@@ -35,5 +35,8 @@ export default {
         return (str.length > len)
             ? (str.substring(0, len) + '...')
             : str;
+    },
+    uniq() {
+        return Date.now() + '' + Math.ceil(Math.random() * 1e4);
     }
 };
