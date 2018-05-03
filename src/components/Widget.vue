@@ -12,9 +12,7 @@
                 >{{item.html}}</div>
 
                 <div v-if="item.isFocused" class="form-wrap">
-                    <b-container fluid tag="form"
-                                 @submit.prevent="submitMethod(item)"
-                    >
+                    <b-container fluid tag="form" @submit.prevent="submitMethod(item)">
                         <b-row>
                             <b-col sm="3">
                                 <label :for="`text-${id}`">Content:</label>
@@ -43,15 +41,13 @@
                             <b-col sm="9">
                                 <b-button type="submit"
                                           variant="primary"
-                                >Save & Close</b-button>
+                                >Save & Close
+                                </b-button>
                             </b-col>
                         </b-row>
                     </b-container>
                 </div>
-            </div>
-
-            </div>
-            <div>
+                </div>
                 <b-button :to="{name: 'delete', params: {id: $route.params.id}}" variant="danger">
                     Delete
                 </b-button>
@@ -73,7 +69,6 @@ export default {
             templateDOM: null
         };
     },
-    computed: {},
     mounted() {
         this.id = +this.$route.params.id;
         let data = DB.get('widgets', {id: this.id});
@@ -91,8 +86,8 @@ export default {
     },
     methods: {
         focusIn(currentItem){
-            this.items.forEach((item)=>{
-                if(item.isFocused) {
+            this.items.forEach((item)=> {
+                if (item.isFocused) {
                     this.submitMethod(item);
                 }
             });
@@ -154,23 +149,27 @@ function createDataItems(context) {
 .widget-editor .editable.focus {
     background-color: #eee;
 }
+
 .widget-editor .editable .content-wrap {
     cursor: pointer;
     padding: 15px;
 }
+
 .widget-editor .editable .form-wrap {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0,.8);
+    background: rgba(0, 0, 0, .8);
     color: #fff;
 }
+
 .widget-editor .editable .container-fluid {
     position: relative;
     top: 15px;
 }
+
 .widget-editor .editable .container-fluid .row {
     margin-bottom: 10px;
 }
